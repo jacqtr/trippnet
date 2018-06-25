@@ -1,0 +1,22 @@
+CREATE VIEW IF NOT EXISTS data_semantic_layer.property_valid_value_vw 
+( 
+  property_key COMMENT 'Unintelligent\system generated unique identifier for a Property.',
+  property_name COMMENT 'Name of a a Property, being an attribute, a quality, or characteristic of a data artefact. Examples: Data Center, Data Base Management System.',
+  property_abbreviation_name COMMENT 'Shortened form or acronym of a Property Name.',
+  property_value_text COMMENT 'Value that is considered valid for a property. Examples: for the Data Center Property valid values can be: EDC Dundee, Antwerp Plantijn, etc...',
+  property_value_description COMMENT 'Statement or explanation of the value of a Property.',
+  property_description COMMENT 'Statement or explanation of a Property.'
+ )
+ COMMENT 'Join between Property and Property Valid Value table for properties having valid values defined.'
+AS
+ (
+  SELECT
+    prop.property_key,
+    prop.property_name,
+    prop.property_abbreviation_name,
+   val.property_value_text,
+   val.property_value_description,
+   prop. property_description
+  FROM data_semantic_layer.property_valid_value val
+   INNER JOIN data_semantic_layer.property prop ON val.property_key = prop.property_key
+ );
